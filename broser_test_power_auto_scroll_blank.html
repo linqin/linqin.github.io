@@ -12,9 +12,10 @@
     var loopStepMs = 500;
     var loopStepY = 100;
     var loopOuterIdx = 0;
-    var loopOuterMax = 1000;
-    var loopInnerIdx = 5;
+    var loopOuterMax = 100;
     var loopInnerMax = 15;
+    var loopInnerIdx = loopInnerMax;
+    //total running time = (loopStepMs * loopInnerMax) * loopOuterMax + startDelayMs
     var scrollHeight = 0;
     function scrollTop() {
         window.scrollTo(0, 0);
