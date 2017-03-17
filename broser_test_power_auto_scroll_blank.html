@@ -1,0 +1,55 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Browser Test Power scroll blank page</title>
+<style id="css_index" index="index" type="text/css">
+    html,body {height:200%}
+    body{font:12px arial;text-align:;background:linear-gradient(to bottom, blue, white);}
+</style>
+<script>
+    var startDelayMs = 2000;
+    var loopStepMs = 500;
+    var loopStepY = 100;
+    var loopOuterIdx = 0;
+    var loopOuterMax = 10;
+    var loopInnerIdx = 5;
+    var loopInnerMax = 5;
+    var scrollHeight = 0;
+    function scrollTop() {
+        window.scrollTo(0, 0);
+    }
+    function startScroll() {
+        //scrollHeight = Math.max( document.body.scrollHeight, document.body.offsetHeight, document.html.clientHeight, document.html.scrollHeight, document.html.offsetHeight );
+        //console.log("scroll start scrollHeight="+scrollHeight);
+        scrollTop();
+        scrolldelay = setTimeout('pageScroll()', loopStepMs);
+    }
+    function initScroll() {
+        scrolldelay = setTimeout('startScroll()', startDelayMs);
+    }
+    function pageScroll() {
+        if (loopInnerIdx >= loopInnerMax) {
+            loopInnerIdx = 0;
+            scrollTop();
+            loopOuterIdx = loopOuterIdx + 1;
+            //console.log("scroll loop "+loopOuterIdx);
+        } else {
+            loopInnerIdx = loopInnerIdx + 1;
+            //console.log("scroll down by "+loopStepY);
+            window.scrollBy(0, loopStepY);                          // horizontal and vertical scroll increments
+        }
+        if (loopOuterIdx <= loopOuterMax) {
+            scrolldelay = setTimeout('pageScroll()', loopStepMs);  // scrolls every 500 milliseconds
+        } else {
+            //console.log("scroll end");
+        }
+    }
+    function stopScroll() {
+        clearTimeout(scrolldelay);
+    }
+</script>
+</head>
+<body onLoad="initScroll()">
+</body>
+</html>
