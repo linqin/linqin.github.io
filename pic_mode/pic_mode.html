@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+    var addedEventListener = false;
+    function clickEventHandler(e) {
+            e.stopPropagation();
+            alert("click img_add_event_listener");
+    }
+    function clickEventListener() {
+        addedEventListener = !addedEventListener;
+        if (addedEventListener) {
+            console.log("addEventListener");
+            document.getElementById("img_add_event_listener").addEventListener("click", clickEventHandler);
+        } else {
+            console.log("removeEventListener");
+            document.getElementById("img_add_event_listener").removeEventListener("click", clickEventHandler);
+        }
+    }
+</script>
+</head>
+<body>
+<h1>Picture Mode</h1>
+<div>
+    <div>
+        <p> small png</p>
+        <div>
+        <img src="firefox_100x105.png" onclick="alert('click firefox_100x105')">
+        </div>
+    </div>
+    <div>
+        <p> big png</p>
+        <div>
+        <img src="chrome_256x256.png" onclick="alert('click chrome_256x256')">
+        </div>
+    </div>
+    <div onclick="alert('click chrome_256x256.svg')">
+        <p> small picture svg</p>
+        <div>
+        <img src="chrome_256x256.svg">
+        </div>
+    </div>
+    <div>
+        <p> small picture png addEventListener</p>
+        <div>
+        <img src="chrome_256x256.png" id="img_add_event_listener">
+        </div>
+        <button onclick="clickEventListener()">ClickEventListener</button>
+        //getEventListeners(document.getElementById("img_add_event_listener"));
+    </div>
+</div>
+</body>
+</html>
