@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+    var addedEventListener = false;
+    function clickEventHandler(e) {
+            e.stopPropagation();
+            alert("click img_add_event_listener");
+    }
+    function clickEventListener() {
+        addedEventListener = !addedEventListener;
+        if (addedEventListener) {
+            console.log("addEventListener");
+            document.getElementById("img_add_event_listener").addEventListener("click", clickEventHandler);
+        } else {
+            console.log("removeEventListener");
+            document.getElementById("img_add_event_listener").removeEventListener("click", clickEventHandler);
+        }
+    }
+</script>
+</head>
+<body>
+<h1>Picture Mode addEventListener</h1>
+<div>
+    <div>
+        <p> picture png addEventListener</p>
+        <div>
+        <img src="chrome_256x256.png" id="img_add_event_listener">
+        </div>
+        <button onclick="clickEventListener()">ClickEventListener</button>
+    </div>
+</div>
+</body>
+</html>
