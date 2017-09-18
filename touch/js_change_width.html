@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script type="text/javascript">
+    var c=0
+    var t
+    var div_text
+    var div_event_move_above
+    var div_width_moved_by_others
+    var div_width_moved_by_self
+    function onload()
+    {
+        div_text = document.getElementById('txt')
+        div_width_moved_by_others = document.getElementById('ui-slider-thumb')
+        div_event_move_above = document.getElementById('ui-slider-event-layer-above')
+        div_event_move_above.addEventListener('touchmove',ontouchmove_other, false)
+        div_width_moved_by_self = document.getElementById('ui-slider-event-layer-self')
+        div_width_moved_by_self.addEventListener('touchmove',ontouchmove_self, false)
+        //timedCount()
+    }
+    function ontouchmove_other(event )
+    {
+        div_text.value="other at "+event.touches[0].clientX + "," + event.touches[0].clientY
+        div_width_moved_by_others.style.width=event.touches[0].clientX/2+"%"
+    }
+    function ontouchmove_self(event )
+    {
+        div_text.value="self at "+event.touches[0].clientX + "," + event.touches[0].clientY
+        div_width_moved_by_self.style.width=event.touches[0].clientX/2+"%"
+    }
+    function timedCount()
+    {
+        div_text.value=c
+        c=(c+10)%100
+        div_width_moved_by_others.style.width=c+"%"
+        t=setTimeout("timedCount()",5000)
+    }
+
+    function stopCount()
+    {
+        c=0;
+        setTimeout("document.getElementById('txt').value=0",0);
+        clearTimeout(t);
+    }
+</script>
+</head>
+<body onload="onload()">
+<h1>Test Touch Move</h1>
+<div class="display">
+    <input type="text" id="txt">
+    <div class="control-bar hide">
+        <div class="control-slider">
+            <div class="ui-slider-container" style="background-color:#000000; width: 200px;">
+                <div class="ui-slider-thumb" id="ui-slider-thumb" style="background-color:#0000ff; width: 100%; ">b</div>
+                <div class="ui-slider-event-layer" id="ui-slider-event-layer-above" style="background-color:#ff0000; width: 100%; ">a</div>
+                <div class="ui-slider-event-layer" id="ui-slider-event-layer-self" style="background-color:#00ff00; width: 100%; ">s</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
